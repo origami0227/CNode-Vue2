@@ -7,7 +7,9 @@
     <!--    主题帖子列表-->
     <div>
       <ul>
-        <li></li>
+        <li v-for="post in posts">
+          <img :src="post.author.avatar_url" alt="">
+        </li>
       </ul>
     </div>
   </div>
@@ -19,6 +21,7 @@ export default {
   data() {
     return {
       isLoading: false, //初始默认false
+      posts:[],//代表页面的列表数组
     }
   },
   methods: {
@@ -29,7 +32,8 @@ export default {
         limit: 20,
       })
         .then(res => {
-          debugger
+          this.isLoading = false // 加载成功后去除动画
+          this.posts = res.data.data
         })
         .catch(err => {
           //处理返回失败后的问题
@@ -39,7 +43,8 @@ export default {
   },
   beforeMount() {
     //挂载前执行
-    this.getData()
+    this.isLoading = true //加载成功之前显示loading
+    this.getData() //页面加载之前获取数据
   }
 }
 </script>
