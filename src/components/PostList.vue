@@ -16,8 +16,6 @@
             <span>招聘</span>
           </div>
         </li>
-      </ul>
-      <ul>
         <li v-for="post in posts">
           <!--  头像-->
           <img :src="post.author.avatar_url" alt="">
@@ -98,7 +96,6 @@ export default {
 
 ul {
   list-style: none;
-  width: 100%;
   max-width: 1344px;
   margin: 0 auto;
 }
