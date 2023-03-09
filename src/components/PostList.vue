@@ -1,11 +1,22 @@
 <template>
   <div class="PostList">
-    <div class="loading">
+    <div class="loading" v-if="isLoading">
       <!--   在数据未返回的时候，显示正在loading的gif-->
-      <img src="../assets/loading.gif" v-if="isLoading">
+      <img src="../assets/loading.gif">
     </div>
     <!--    主题帖子列表-->
-    <div>
+    <div class="posts" v-else>
+      <ul>
+        <li>
+          <div class="toobar">
+            <span>全部</span>
+            <span>精华</span>
+            <span>分享</span>
+            <span>问答</span>
+            <span>招聘</span>
+          </div>
+        </li>
+      </ul>
       <ul>
         <li v-for="post in posts">
           <!--  头像-->
@@ -15,13 +26,20 @@
             <span class="reply_count">{{ post.reply_count }}</span>
             /{{ post.visit_count }}
           </span>
+          <!--帖子分类  动态绑定class  -->
+          <span
+            :class="[{put_good:(post_good == ture),put_top:(post_top == ture),'topiclist-tab':(post.good  != true && post.top  != true)}]">
+            <span>
+              {{ post | tabFormatter }}
+            </span>
+          </span>
           <span>
            <!--  标题-->
-            {{post.title}}
+            {{ post.title }}
           </span>
-           <!--  最终回复时间 -->
+          <!--  最终回复时间 -->
           <span class="last_reply">
-            {{post.last_reply_at}}
+            {{ post.last_reply_at | formatDate }}
           </span>
         </li>
       </ul>
