@@ -1,14 +1,28 @@
 <template>
   <div class="PostList">
     <div class="loading">
-      <!--      在数据未返回的时候，显示正在loading的gif-->
+      <!--   在数据未返回的时候，显示正在loading的gif-->
       <img src="../assets/loading.gif" v-if="isLoading">
     </div>
     <!--    主题帖子列表-->
     <div>
       <ul>
         <li v-for="post in posts">
+          <!--  头像-->
           <img :src="post.author.avatar_url" alt="">
+          <span class="allcount">
+         <!--  回复/浏览-->
+            <span class="reply_count">{{ post.reply_count }}</span>
+            /{{ post.visit_count }}
+          </span>
+          <span>
+           <!--  标题-->
+            {{post.title}}
+          </span>
+           <!--  最终回复时间 -->
+          <span class="last_reply">
+            {{post.last_reply_at}}
+          </span>
         </li>
       </ul>
     </div>
@@ -70,6 +84,7 @@ ul {
   max-width: 1344px;
   margin: 0 auto;
 }
+
 ul li:not(:first-child) {
   padding: 9px;
   font-size: 15px;
@@ -79,13 +94,93 @@ ul li:not(:first-child) {
   color: #333;
   border-top: 1px solid #f0f0f0; /*列表样式*/
 }
+
 li:not(:first-child):hover {
   background: #f5f5f5; /*悬浮在非第一个li时变色*/
 }
+
 li:last-child:hover {
   background: white;
 }
+
 li span {
   line-height: 30px;
+}
+
+.allcount {
+  width: 70px;
+  display: inline-block;
+  text-align: center;
+  font-size: 12px;
+}
+
+.reply_count {
+  color: #9e78c0;
+  font-size: 14px;
+}
+
+.put_good, .put_top {
+  background: #80bd01;
+  padding: 2px 4px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  color: #fff;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.topiclist-tab {
+  background-color: #e5e5e5;
+  color: #999;
+  padding: 2px 4px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.last_reply {
+  text-align: right;
+  min-width: 50px;
+  display: inline-block;
+  white-space: nowrap;
+  float: right;
+  color: #778087;
+  font-size: 12px;
+}
+
+.toobar {
+  height: 40px;
+  background-color: #f5f5f5;
+}
+
+.toobar span {
+  font-size: 14px;
+  color: #80bd01;
+  line-height: 40px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.toobar span:hover {
+  color: #9e78c0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.loading {
+  text-align: center;
+  padding-top: 300px;
 }
 </style>
