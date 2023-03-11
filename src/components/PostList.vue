@@ -132,7 +132,7 @@ li span {
 
 .reply_count {
   color: #9e78c0;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .put_good, .put_top {
