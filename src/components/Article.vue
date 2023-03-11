@@ -3,16 +3,16 @@
     <!--在数据未显示的时候显示正在加载的loading-->
     <div class="loading" v-if="isLoading">
       <img src="../assets/loading.gif">
-      <div v-else>
-        <div class="topic_header">
-          <div class="topic_title">{{post.title}}</div>
-          <ul>
-            <li>·发布于:{{post.create_at | formatDate}}</li>
-            <li>·作者:{{post.author.loginname}}</li>
-            <li>·{{post.visit_count}}次浏览</li>
-            <li>·来自{{post | tabFormatter}}</li>
-          </ul>
-        </div>
+    </div>
+    <div v-else>
+      <div class="topic_header">
+        <div class="topic_title">{{ post.title }}</div>
+        <ul>
+          <li>·发布于:{{ post.create_at | formatDate }}</li>
+          <li>·作者:{{ post.author.loginname }}</li>
+          <li>·{{ post.visit_count }}次浏览</li>
+          <li>·来自{{ post | tabFormatter }}</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -24,7 +24,12 @@ export default {
   data() {
     return {
       isLoading: false, //是否正在加载
-      post:{},//文章页的所有内容
+      post: {},//文章页的所有内容
+    }
+  },
+  methods: {
+    getArticleData() {
+
     }
   }
 }

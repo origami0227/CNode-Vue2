@@ -31,10 +31,18 @@
               {{ post | tabFormatter }}
             </span>
           </span>
-          <span>
-           <!--  标题-->
+          <!--  标题-->
+          <!--RouterLink的名称和查询参数-->
+          <RouterLink :to="{
+            name:'post_content',
+            params:{
+             id:post.id,
+             name:post.author.loginname,
+            }}">
+             <span>
             {{ post.title }}
           </span>
+          </RouterLink>
           <!--  最终回复时间 -->
           <span class="last_reply">
             {{ post.last_reply_at | formatDate }}
