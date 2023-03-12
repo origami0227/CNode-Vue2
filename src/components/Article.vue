@@ -15,6 +15,25 @@
         </ul>
         <div v-html="post.content" class="topic_content"></div>
       </div>
+      <div id="reply">
+        <div class="topbar">回复</div>
+        <div v-for="(reply,index) in post.replies">
+          <div class="replyUp">
+            <router-link to="">
+              <img :src="reply.author.avatar_url" alt="">
+            </router-link>
+            <router-link to="">
+              <span>{{reply.author.loginname}}</span>
+            </router-link>
+            <span>{{index+1}}楼</span>
+            <span v-if="reply.ups.length>0">
+            {{reply.ups.length}}
+          </span>
+            <span v-else></span>
+          </div>
+          <p v-html="reply.content"></p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +51,7 @@ export default {
     getArticleData() {
       this.$http.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
         .then(res=>{
-          if(res.data.success == true){
+          if(res.data.success === true){
             this.isLoading = false
             this.post = res.data.data //请求回来的数据赋值给psot
           }
