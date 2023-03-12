@@ -13,6 +13,7 @@
           <li>·{{ post.visit_count }}次浏览</li>
           <li>·来自{{ post | tabFormatter }}</li>
         </ul>
+        <div v-html="post.content" class="topic_content"></div>
       </div>
     </div>
   </div>
@@ -24,18 +25,31 @@ export default {
   data() {
     return {
       isLoading: false, //是否正在加载
-      post: {},//文章页的所有内容
+      post: {},//文章页的所有内容以及属性
     }
   },
   methods: {
     getArticleData() {
-
+      this.$http.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`)
+        .then(res=>{
+          if(res.data.success == true){
+            this.isLoading = false
+            this.post = res.data.data //请求回来的数据赋值给psot
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
+  },
+  beforeMount() {
+    this.isLoading = true
+    this.getArticleData()
   }
 }
 </script>
 
-<style scoped>
+<style>
 @import url('../assets/markdown-github.css');
 
 .topbar {
@@ -83,7 +97,7 @@ export default {
 }
 
 .replyUp a:nth-of-type(2) {
-  margin-left: 0px;
+  margin-left: 0;
   display: inline-block;
 }
 
@@ -99,8 +113,8 @@ export default {
 
 .topic_header ul {
   list-style: none;
-  padding: 0px 0px;
-  margin: 6px 0px;
+  padding: 0 0px;
+  margin: 6px 0;
 }
 
 .topic_header li {

@@ -88,17 +88,16 @@ export default {
 </script>
 
 <style scoped>
-.PostList {
+.PostList{
   background-color: #e1e1e1;
 }
-
 .posts {
   margin-top: 10px;
 }
 
 .PostList img {
-  width: 30px;
   height: 30px;
+  width: 30px;
   vertical-align: middle;
 }
 
@@ -116,11 +115,11 @@ ul li:not(:first-child) {
   font-weight: 400;
   background-color: white;
   color: #333;
-  border-top: 1px solid #f0f0f0; /*列表样式*/
+  border-top: 1px solid #f0f0f0;
 }
 
 li:not(:first-child):hover {
-  background: #f5f5f5; /*悬浮在非第一个li时变色*/
+  background: #f5f5f5;;
 }
 
 li:last-child:hover {
@@ -140,7 +139,7 @@ li span {
 
 .reply_count {
   color: #9e78c0;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .put_good, .put_top {
