@@ -19,7 +19,12 @@
         <div class="topbar">回复</div>
         <div v-for="(reply,index) in post.replies">
           <div class="replyUp">
-            <router-link to="">
+            <router-link :to="{
+              name:'user_info',
+              params:{
+                name:reply.author.loginname
+              }
+            }">
               <img :src="reply.author.avatar_url" alt="">
             </router-link>
             <router-link to="">
