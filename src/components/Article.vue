@@ -114,6 +114,9 @@ export default {
   border-bottom: 1px solid #e5e5e5;
   padding: 0 10px;
 }
+.replySec p {
+  padding: 3px 0;
+}
 
 .loading {
   text-align: center;
