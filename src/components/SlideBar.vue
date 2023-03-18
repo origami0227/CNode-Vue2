@@ -1,12 +1,50 @@
 <template>
   <div class="autherinfo">
-
+<!--    分为三个栏目 -->
+    <div class="authersummay">
+      <div class="topbar">作者</div>
+      <router-link :to="{
+              name:'user_info',
+              params:{
+                name:userinfo.loginname
+              }
+            }">
+        <img :src="userinfo.avatar_url">
+      </router-link>
+    </div>
+    <div class="recent_topics">
+      <div class="topbar">最近主题</div>
+    </div>
+    <div class="recent_replies">
+      <div class="topbar">最近回复</div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SlideBar"
+  name: "SlideBar",
+  data(){
+    return {
+      userinfo:{} //侧边栏里面的所有数据
+    }
+  },
+  methods:{
+    getData(){
+      this.$http.get(`https://cnodejs.org/api/v1/user/${this.$route.params.name}`)
+        .then(res=>{
+          this.userinfo = res.data.data
+        })
+        .catch(err=>{
+          //遇到错误则返回错误信息
+          console.log(err)
+        })
+    }
+  },
+  beforeMount() {
+    //挂载前执行
+    this.getData()
+  }
 }
 </script>
 

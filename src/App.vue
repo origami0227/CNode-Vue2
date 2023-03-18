@@ -2,8 +2,8 @@
   <div id="app">
     <Header/>
     <div class="main">
-      <RouterView name="main"/>
       <RouterView name="slidebar"/>
+      <RouterView name="main"/>
     </div>
   </div>
 </template>
@@ -11,14 +11,12 @@
 <script>
 import Header from './components/Header'
 import PostList from "./components/PostList";
-import SlideBar from "./components/SlideBar";
 
 export default {
   name: 'App',
   components: {
     Header,
     PostList,
-    SlideBar
   },
 }
 </script>
