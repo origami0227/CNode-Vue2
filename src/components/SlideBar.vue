@@ -1,6 +1,6 @@
 <template>
   <div class="autherinfo">
-<!--    分为三个栏目 -->
+    <!--    分为三个栏目 -->
     <div class="authersummay">
       <div class="topbar">作者</div>
       <router-link :to="{
@@ -14,6 +14,12 @@
     </div>
     <div class="recent_topics">
       <div class="topbar">最近主题</div>
+      <ul>
+<!--        使用计算属性-->
+        <li v-for="list in topiclimitby5">
+          {{ list.title }}
+        </li>
+      </ul>
     </div>
     <div class="recent_replies">
       <div class="topbar">最近回复</div>
@@ -24,27 +30,35 @@
 <script>
 export default {
   name: "SlideBar",
-  data(){
+  data() {
     return {
-      userinfo:{} //侧边栏里面的所有数据
+      userinfo: {} //侧边栏里面的所有数据
     }
   },
-  methods:{
-    getData(){
+  methods: {
+    getData() {
       this.$http.get(`https://cnodejs.org/api/v1/user/${this.$route.params.name}`)
-        .then(res=>{
+        .then(res => {
           this.userinfo = res.data.data
         })
-        .catch(err=>{
+        .catch(err => {
           //遇到错误则返回错误信息
           console.log(err)
         })
     }
   },
+  //使用计算属性让最近主题仅显示5个
+  computed: {
+    topiclimitby5() {
+      if(this.userinfo.recent_topics){
+        return this.userinfo.recent_topics.slice(0,5)
+      }
+    }
+  },
   beforeMount() {
     //挂载前执行
     this.getData()
-  }
+  },
 }
 </script>
 
