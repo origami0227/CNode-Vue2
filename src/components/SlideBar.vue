@@ -15,14 +15,35 @@
     <div class="recent_topics">
       <div class="topbar">最近主题</div>
       <ul>
-<!--        使用计算属性-->
+        <!--        使用计算属性-->
         <li v-for="list in topiclimitby5">
-          {{ list.title }}
+          <router-link :to="{
+        name:'post_content',
+        params:{
+          id:list.id,
+          name:list.author.loginname
+        }
+        }">
+            {{ list.title }}
+          </router-link>
         </li>
       </ul>
     </div>
     <div class="recent_replies">
       <div class="topbar">最近回复</div>
+      <ul>
+        <li v-for="list in replylimitby5">
+          <router-link :to="{
+        name:'post_content',
+        params:{
+          id:list.id,
+          name:list.author.loginname
+        }
+        }">
+            {{ list.title }}
+          </router-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -50,8 +71,13 @@ export default {
   //使用计算属性让最近主题仅显示5个
   computed: {
     topiclimitby5() {
-      if(this.userinfo.recent_topics){
-        return this.userinfo.recent_topics.slice(0,5)
+      if (this.userinfo.recent_topics) {
+        return this.userinfo.recent_topics.slice(0, 5)
+      }
+    },
+    replylimitby5() {
+      if (this.userinfo.recent_replies) {
+        return this.userinfo.recent_replies.splice(0, 5)
       }
     }
   },

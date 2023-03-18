@@ -69,6 +69,12 @@ export default {
   beforeMount() {
     this.isLoading = true
     this.getArticleData()
+  },
+  //检测路由变化
+  watch:{
+    '$route'(to,from){
+      this.getArticleData()
+    }
   }
 }
 </script>
